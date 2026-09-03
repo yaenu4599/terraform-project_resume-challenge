@@ -1,0 +1,57 @@
+name: project; resume challange
+
+on:
+  push:
+    branches: 
+    - main 
+    - dev
+  workflow_dispatch:
+    inputs:
+      actions:
+        description: 'terraform commands'
+        required: true
+        type: choice
+        options:
+          - Plan
+          - Apply
+          - Destroy
+permissions: 
+  id-token: write
+  contents: read
+
+jobs:
+  Terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git clone the repository 
+        uses: actions/checkout@v6
+      
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with: 
+          aws-region: eu-central-1
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_INSTACE_ROLE }}
+          aws-profile: ${{ secrets.AWS_ACCOUNT_NAME }}
+
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: terraform init with s3 backend
+        run: terraform init -backend-config="bucket=${{ secrets.MY_BUCKET }}"
+
+      - name: terraform Plan
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.actions == 'Plan'
+        run: 
+
+      - name: terraform apply with auto approve
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.actions == 'Apply'
+        run: terraform apply -auto-approve
+
+      - name: terraform destroy with auto approve
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.actions == 'Destroy'
+        run: terraform destroy  -auto-approve
+        
+
+
+
+  
