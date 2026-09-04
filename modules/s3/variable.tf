@@ -2,20 +2,18 @@
 # general tags
 #-------------------------------------------------------------
 
+variable "general_tags" {
+  description = "to add tags for each resource terraform manages"
+  type = map(string)
+}
+
 variable "environment" {
   description = "to tag all the resources with an environment"
   type = string
-  default = dev
-}
-
-variable "managedby" {
-  description = "to tag resources add with terraform"
-  type = string
-  default = "terraform"
 }
 
 #-------------------------------------------------------------
-# s3
+# input
 #-------------------------------------------------------------
 
 variable "resume_bucket" {
