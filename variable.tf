@@ -5,7 +5,7 @@
 variable "environment" {
   description = "to tag all the resources with an environment"
   type = string
-  default = dev
+  default = "dev"
 }
 
 variable "managedby" {
