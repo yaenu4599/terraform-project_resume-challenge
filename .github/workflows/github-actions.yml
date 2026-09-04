@@ -2,9 +2,7 @@ name: project; resume challange
 
 on:
   push:
-    branches: 
-    - main 
-    - dev
+    branches: [main, dev]
   workflow_dispatch:
     inputs:
       actions:
