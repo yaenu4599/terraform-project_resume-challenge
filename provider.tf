@@ -14,7 +14,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    key          = "terraform/backend/resume_challange/terraform.tfstate"
+    key          = "terraform/backend/resume_challenge"
     region       = "eu-central-1"
     encrypt      = true
     use_lockfile = true
