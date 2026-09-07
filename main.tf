@@ -9,7 +9,7 @@ locals {
 module "s3" {
   source = "./modules/s3"
 
-  general_tags = locals.common_tags
+  general_tags = locals.general_tags
   environment = var.environment
 
   bucket_main = var.bucket_main
