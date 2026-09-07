@@ -18,7 +18,7 @@ variable "managedby" {
 # s3
 #-------------------------------------------------------------
 
-variable "resume_bucket" {
+variable "bucket_main" {
   description = "s3 bucked containing the index file and images"
   type = string
 }

@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "main" {
-  bucket = var.resume_bucket
+  bucket = var.bucket_main
   
   tags = merge(var.general_tags, {
     Name = "${var.environment}-resume-main-bucket"

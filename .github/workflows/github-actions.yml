@@ -20,6 +20,8 @@ permissions:
 jobs:
   Terraform:
     runs-on: ubuntu-latest
+    env: 
+      TF_VAR_bucket_main: ${{ secrets.BUCKET_MAIN }}
     steps:
       - name: git clone the repository 
         uses: actions/checkout@v6
@@ -35,7 +37,7 @@ jobs:
         uses: hashicorp/setup-terraform@v4
 
       - name: terraform init with s3 backend
-        run: terraform init -backend-config="bucket=${{ secrets.MY_BUCKET }}"
+        run: terraform init -backend-config="bucket=${{ secrets.BUCKET_BACKEND }}"
 
       - name: terraform Plan
         if: github.event_name != 'workflow_dispatch' || github.event.inputs.actions == 'Plan'

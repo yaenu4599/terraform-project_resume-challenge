@@ -12,5 +12,5 @@ module "s3" {
   general_tags = locals.common_tags
   environment = var.environment
 
-  resume_bucket = var.resume_bucket
+  bucket_main = var.bucket_main
 }
