@@ -39,7 +39,7 @@ jobs:
 
       - name: terraform Plan
         if: github.event_name != 'workflow_dispatch' || github.event.inputs.actions == 'Plan'
-        run: 
+        run: terraform plan
 
       - name: terraform apply with auto approve
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.actions == 'Apply'
